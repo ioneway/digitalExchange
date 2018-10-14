@@ -1,0 +1,36 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'sz_copy' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  
+  use_frameworks!
+  pod 'Moya-ObjectMapper'
+  pod 'Moya-ObjectMapper/RxSwift'
+  pod 'Moya/RxSwift'
+  pod 'ObjectMapper'
+  pod 'NSObject+Rx'
+  pod 'Action'
+  pod 'Moya'
+  pod 'RxCocoa'
+  pod 'XCGLogger'
+  pod 'RxSwift'
+  pod 'RxSwiftExt'
+  pod 'CocoaAsyncSocket'
+  pod 'GzipSwift', '~> 4.0.4'
+  pod 'ObjectMapper+Realm'
+  pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
+  pod 'SDCycleScrollView'
+  pod 'SnapKit'
+  pod 'Simple-KeychainSwift'
+
+  
+  # Pods for sz_copy
+
+  target 'sz_copyTests' do
+    inherit! :search_paths
+    # Pods for testing
+    
+  end
+
+end
