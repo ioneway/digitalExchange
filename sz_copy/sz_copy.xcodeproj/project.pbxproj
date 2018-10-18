@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		449CC5AB37F62B4DBF96AFE3 /* Pods_sz_copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6131FDC84C8DE750B91BA4 /* Pods_sz_copy.framework */; };
+		4A0822CB21784FF1002A6997 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0822CA21784FF1002A6997 /* SliderView.swift */; };
 		4A17021F2153811F00ADAB90 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1702182153811F00ADAB90 /* MineViewController.swift */; };
 		4A1702202153811F00ADAB90 /* AllTradeInfoRequireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17021A2153811F00ADAB90 /* AllTradeInfoRequireModel.swift */; };
 		4A1702212153811F00ADAB90 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17021B2153811F00ADAB90 /* CoinModel.swift */; };
@@ -43,6 +44,9 @@
 		4A17029E215BE5F700ADAB90 /* TickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A17029D215BE5F700ADAB90 /* TickModel.swift */; };
 		4A1702A1215C7F4500ADAB90 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1702A0215C7F4500ADAB90 /* Operators.swift */; };
 		4A1702A3215CD85000ADAB90 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1702A2215CD85000ADAB90 /* LocationManager.swift */; };
+		4A40832621789F08006C4261 /* SliderValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A40832521789F08006C4261 /* SliderValue.swift */; };
+		4A40832A2178E34A006C4261 /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4083292178E34A006C4261 /* MineHeaderView.swift */; };
+		4A40832C2178E427006C4261 /* MineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A40832B2178E427006C4261 /* MineTableViewCell.swift */; };
 		4A4E1B1E215E042E00A09CC5 /* AnnouncementListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E1B1D215E042E00A09CC5 /* AnnouncementListRequestModel.swift */; };
 		4A4E1B20215E05DC00A09CC5 /* DividendTotalRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E1B1F215E05DC00A09CC5 /* DividendTotalRequestModel.swift */; };
 		4A4E1B22215E0C6500A09CC5 /* ExchangeTotalRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E1B21215E0C6500A09CC5 /* ExchangeTotalRequestModel.swift */; };
@@ -142,6 +146,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A0822CA21784FF1002A6997 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		4A1702182153811F00ADAB90 /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		4A17021A2153811F00ADAB90 /* AllTradeInfoRequireModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllTradeInfoRequireModel.swift; sourceTree = "<group>"; };
 		4A17021B2153811F00ADAB90 /* CoinModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
@@ -179,6 +184,9 @@
 		4A17029D215BE5F700ADAB90 /* TickModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickModel.swift; sourceTree = "<group>"; };
 		4A1702A0215C7F4500ADAB90 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		4A1702A2215CD85000ADAB90 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		4A40832521789F08006C4261 /* SliderValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderValue.swift; sourceTree = "<group>"; };
+		4A4083292178E34A006C4261 /* MineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
+		4A40832B2178E427006C4261 /* MineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTableViewCell.swift; sourceTree = "<group>"; };
 		4A4E1B1D215E042E00A09CC5 /* AnnouncementListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListRequestModel.swift; sourceTree = "<group>"; };
 		4A4E1B1F215E05DC00A09CC5 /* DividendTotalRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendTotalRequestModel.swift; sourceTree = "<group>"; };
 		4A4E1B21215E0C6500A09CC5 /* ExchangeTotalRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTotalRequestModel.swift; sourceTree = "<group>"; };
@@ -402,6 +410,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4A4083282178E339006C4261 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A4083292178E34A006C4261 /* MineHeaderView.swift */,
+				4A40832B2178E427006C4261 /* MineTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4A4E9898214FD1920093A97F /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +613,7 @@
 		4A4E990D2152306B0093A97F /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				4A4083282178E339006C4261 /* View */,
 				4A1702192153811F00ADAB90 /* Model */,
 				4A1702172153811F00ADAB90 /* VC */,
 				4A17021D2153811F00ADAB90 /* VM */,
@@ -610,6 +628,8 @@
 				4A5451DE21709A62003E3CB2 /* ExchangeDirectionControl.swift */,
 				4ACFCA42217246050037F902 /* PriceInputView.swift */,
 				4ACFCA482172F6250037F902 /* DropDownBtn.swift */,
+				4A0822CA21784FF1002A6997 /* SliderView.swift */,
+				4A40832521789F08006C4261 /* SliderValue.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -992,6 +1012,7 @@
 				4A4E98EE2150F0ED0093A97F /* Notifications.swift in Sources */,
 				4A4E990B21522F900093A97F /* MarketViewModel.swift in Sources */,
 				4A4E990821522F830093A97F /* MiningViewController.swift in Sources */,
+				4A0822CB21784FF1002A6997 /* SliderView.swift in Sources */,
 				4A1702612154D48D00ADAB90 /* ServerExTick.swift in Sources */,
 				4A4E98B8214FD1920093A97F /* ViewModelService.swift in Sources */,
 				4A4E98F32150F0ED0093A97F /* Double.swift in Sources */,
@@ -1021,6 +1042,7 @@
 				4A4E98BD214FD1920093A97F /* MoyaProvider+Rx.swift in Sources */,
 				4A4E98E42150F0ED0093A97F /* AppWindow.swift in Sources */,
 				4A5451DF21709A62003E3CB2 /* ExchangeDirectionControl.swift in Sources */,
+				4A40832621789F08006C4261 /* SliderValue.swift in Sources */,
 				4A4E98EF2150F0ED0093A97F /* UIColor+ext.swift in Sources */,
 				4A1702642154D48D00ADAB90 /* ServerExTicBTC.swift in Sources */,
 				4A5B154F216B989B0054443C /* HomeNavigationView.swift in Sources */,
@@ -1029,6 +1051,7 @@
 				4ACFCA4C217376A80037F902 /* UITextField+Extention.swift in Sources */,
 				4A5451D821708B05003E3CB2 /* UIImage+QRCode.swift in Sources */,
 				4A1702222153811F00ADAB90 /* LastVersionRequestModel.swift in Sources */,
+				4A40832A2178E34A006C4261 /* MineHeaderView.swift in Sources */,
 				4A4E98E92150F0ED0093A97F /* UIColor+Asset.swift in Sources */,
 				4A4E1B24215E2F3300A09CC5 /* WebViewController.swift in Sources */,
 				4A4E98F42150F0ED0093A97F /* App.swift in Sources */,
@@ -1039,6 +1062,7 @@
 				4A4E98F12150F0ED0093A97F /* UIImage+Asset.swift in Sources */,
 				4A1702212153811F00ADAB90 /* CoinModel.swift in Sources */,
 				4A170292215AA17700ADAB90 /* LZDoubleTransform.swift in Sources */,
+				4A40832C2178E427006C4261 /* MineTableViewCell.swift in Sources */,
 				4A170284215A000300ADAB90 /* Server.swift in Sources */,
 				4A4E98E52150F0ED0093A97F /* UIButton+border.swift in Sources */,
 				4A170298215B57C200ADAB90 /* MininView.swift in Sources */,

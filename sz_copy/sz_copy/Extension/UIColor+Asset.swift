@@ -45,6 +45,7 @@ extension UIColor {
             case Increase = "#109053"
             case Seperate = "#485E7E"
             case Red = "#B82A2A"
+            case node = "#2A374C"
             var color : UIColor {
                 return UIColor(hexStr: self.rawValue)
             }

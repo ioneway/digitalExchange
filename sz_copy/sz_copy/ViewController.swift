@@ -26,6 +26,7 @@ class ViewController: BaseViewController<TabBarViewModel>, UITabBarControllerDel
         
         let exchangeVC: ExchangeViewController = Router.viewController((viewModel?.exchangeViewModel)!) as! ExchangeViewController
         let exchangeNav = generateNav(rootVC: exchangeVC, title: "交易".local, selectedImage: ImgAsset.Tab_exchange_selected.image, normalImage: ImgAsset.Tab_exchange.image)
+//        exchangeNav.navigationBar.barTintColor = ColorAsset
         
         let miningVC: MiningViewController = Router.viewController((viewModel?.miningViewModel)!) as! MiningViewController
         let miningNav = generateNav(rootVC: miningVC, title: "挖矿".local, selectedImage: ImgAsset.Tab_mining_selected.image, normalImage: ImgAsset.Tab_mining.image)

@@ -23,7 +23,7 @@ class NumberInputView: UIView {
         return temp
     }()
     
-    private lazy var textField: UITextField = {
+    public lazy var textField: UITextField = {
         var temp = UITextField()
         temp.borderStyle = .none
         temp.keyboardType = .decimalPad
@@ -96,7 +96,7 @@ class NumberInputView: UIView {
     
     /// 用于双向绑定数据，
     public lazy var textVariable = {
-        return textField.rx.textInput
+        return textField.rx.text.orEmpty
     }()
     
    

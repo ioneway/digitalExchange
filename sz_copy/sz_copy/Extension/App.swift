@@ -135,5 +135,17 @@ public struct App {
         freeifaddrs(ifaddr)
         return address
     }
+    
+    public var deviceInfo: String? {
+        get {
+            let sysName = UIDevice.current.systemName
+            let sysVersion = UIDevice.current.systemVersion
+            let deviceModel = UIDevice.current.model
+            
+            return deviceModel + "_" + sysName + "_" + sysVersion + "_"
+        }
+    }
+    
+   
 }
 

@@ -69,6 +69,11 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
         return temp
     }()
     
+    private lazy var _sliderView: SliderView = {
+        let temp = SliderView.init()
+        return temp
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,6 +94,7 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
         _contentScroll.addSubview(_currencyPriceLabel)
         _contentScroll.addSubview(_numberInputView)
         _contentScroll.addSubview(_canUseCoinNumLabel)
+        _contentScroll.addSubview(_sliderView)
     }
     
     override func configConstraints() {
@@ -122,6 +128,7 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
             make.left.equalTo(_priceInputView)
             make.top.equalTo(_priceInputView.snp.bottom).offset(5)
         }
+        
         _numberInputView.snp.makeConstraints{ make in
             make.left.equalTo(_priceInputView)
             make.top.equalTo(_priceInputView.snp.bottom).offset(30)
@@ -131,6 +138,13 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
         _canUseCoinNumLabel.snp.makeConstraints{ (make) in
             make.left.equalTo(_numberInputView)
             make.top.equalTo(_numberInputView.snp.bottom).offset(5)
+        }
+        
+        _sliderView.snp.makeConstraints{ (make) in
+            make.left.equalTo(_numberInputView)
+            make.top.equalTo(_canUseCoinNumLabel.snp.bottom).offset(20)
+            make.height.equalTo(15)
+            make.width.equalTo(190.x)
         }
 
     }
@@ -156,14 +170,35 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
         }
         
         /// 数量输入框的双向绑定
-        let _ = _numberInputView.textVariable <-> (viewModel?.numberVariable ?? Variable(""))
+//        let _ = _numberInputView.textVariable <-> (viewModel?.numberVariable ?? Variable(""))
+        
+        let _ = _numberInputView.textVariable.asObservable().bind { result in
+            self.viewModel?.numberVariable.value = result
+            if result.decimal.decimalValue != Decimal.nan {
+                        self._sliderView.value = CGFloat((result.decimal / 1000.decimal).doubleValue)
+                    }
+        }
+        
         /// 数量输入框 币种名称绑定
         let _ = viewModel?.coinCodeVariable.asObservable().bind { result in
             self._numberInputView.coinName = result
         }
         
+//        /// 绑定：当viewmodel对应值发生变化时，sliderView的值变化
+//        let _ = viewModel?.numberVariable.asObservable().bind { result in
+//            if result.decimal.decimalValue != Decimal.nan{
+//                self._sliderView.value = CGFloat((result.decimal / 1000.decimal).doubleValue)
+//            }
+//        }
+        
+        /// 绑定：当sliderView的值变化时，数量输入框的值变化，同时viewmodel对应值随同变化，
+        let _ = _sliderView.valueVariable.asObservable().bind { result in
+            self._numberInputView.text = Double(result*CGFloat(1000)).decimal.string
+            self._viewModel?.numberVariable.value = Double(result*CGFloat(1000)).decimal.string
+        }
+        
         /// 可用币数额的绑定
-        let _ = viewModel?.canUseNumVariable.asObservable().bind{ result in
+        let _ = viewModel?.canUseNumVariable.asObservable().bind { result in
             self._canUseCoinNumLabel.text = result
         }
     }
@@ -177,9 +212,11 @@ extension ExchangeViewController: ExchangeDirectionControlDelegate, ActionSheetD
         if directionView.direction == .buy { //买入
           // 价格输入框加减按钮变色 买入 绿色
             _priceInputView.symbolColor = ColorAsset.Block.Increase.color
+            _sliderView.selectColor = ColorAsset.Block.Increase.color
         }else { //卖出
             // 价格输入框加减按钮变色 卖出 红色
             _priceInputView.symbolColor = ColorAsset.Block.Drop.color
+            _sliderView.selectColor = ColorAsset.Block.Drop.color
         }
     }
     

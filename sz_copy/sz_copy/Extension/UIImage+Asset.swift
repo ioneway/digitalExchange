@@ -42,6 +42,15 @@ extension UIImage {
         case plus = "plus"
         case downBtn = "downBtn"
         
+        case portrait = "portrait"
+        case arrow_right = "arrow_right"
+        case dollar = "dollar"
+        case location = "location"
+        case help = "Help"
+        case security = "Security"
+        case gift = "gift"
+        case digitalNode = "digitalNode"
+        
         var image: UIImage {
             return UIImage(asset: self)
         }
