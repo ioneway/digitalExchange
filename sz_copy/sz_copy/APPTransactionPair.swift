@@ -16,8 +16,8 @@ class APPTransactionPair: NSObject {
     
     static let `default`: APPTransactionPair = APPTransactionPair()
     
-    var exTickDatas: ExTickModels?  //数字货币兑法币的汇率
-    var exTickBTCDatas: ExTickBTCModels?  //数字币兑BTC的汇率
+    var exTickDatasVariable = Variable<ExTickModels>(ExTickModels())  //数字货币兑法币的汇率
+    var exTickBTCDatasVariable = Variable<ExTickBTCModels>(ExTickBTCModels()) //数字币兑BTC的汇率
     var allCoinDetailModel: AllCoinDetailRequestModel? //数字
     
     var coinDetailModels: [AllCoinDetailModel]? = {
@@ -38,6 +38,7 @@ class APPTransactionPair: NSObject {
     var coinPairs = [String: [TradeInfoModel]]()
     var coinPairsModels = [TradeInfoModel]()//币种规则
     var coinMarketDic = [String: [TickModel]]()//币种行情
+    var coinValueChangeIndexVariable = Variable<[String: Int]>(["":-1])
     
     var sourceCoinsVariable = Variable<[String]>([String]())
     var coinMarketDicVariable = Variable<[String: [TickModel]]>([String: [TickModel]]())
@@ -47,7 +48,6 @@ class APPTransactionPair: NSObject {
     @discardableResult
     override init() {
         super.init()
-        SocketManager.shared.delegate = self
         
         requireAllCoinDetail()
         requireAllTradeInfo()
@@ -64,14 +64,15 @@ class APPTransactionPair: NSObject {
             case .success(let repos):
                 self.allCoinDetailModel = repos
                 self.coinDetailModels = repos.data
-                try! realm.write {
-                    realm.add(self.coinDetailModels!)
+                if let models = self.coinDetailModels {
+                    try! realm.write {
+                        realm.add(models)
+                    }
                 }
-                
             case .error(let error):
                 print(error)
             }
-            }.disposed(by: _disposeBag)
+        }.disposed(by: _disposeBag)
     }
     
     ///获取可交易币种
@@ -119,11 +120,12 @@ class APPTransactionPair: NSObject {
             case .error(let error):
                 print(error)
             }
-            }.disposed(by: _disposeBag)
+        }.disposed(by: _disposeBag)
     }
     
-    
+    /// 订阅行情， 参数主要币种，币种二
     func subscriptTickServer(coinName: String ) {
+        SocketManager.shared.delegate = self
         let pairs = self.coinPairNames[coinName]
         var symbols = [String]()
         for (_, pair) in (pairs?.enumerated())! {
@@ -132,10 +134,71 @@ class APPTransactionPair: NSObject {
                 symbols.append(infor)
             }
         }
-        var server = ServerTick()
-        server.symbols = symbols
-        SocketManager.shared.subscribe(server: server)  ////行情
+        let server = TickSocket(symbols: symbols)
+        SocketManager.shared.subscribe(server: server)
     }
+    
+    
+    /// 订阅行情， 全币对
+    func subscriptAllTickServer() {
+        SocketManager.shared.delegate = self
+        let pairs = coinPairNames.values.reversed()
+        var allPair:[String] = []
+        pairs.forEach{ item in
+            allPair.append(contentsOf: item)
+        }
+        var symbols = [String]()
+        for (_, pair) in allPair.enumerated() {
+            let infor = pair.replacingOccurrences(of: "/", with: "_")
+            if infor.count != 0 {
+                symbols.append(infor)
+            }
+        }
+        let server = TickSocket(symbols: symbols)
+        SocketManager.shared.subscribe(server: server)
+    }
+    
+    
+    func cancelSubScriptTickServer() {
+        let pairs = coinPairNames.values.reversed()
+        var allPair:[String] = []
+        pairs.forEach{ item in
+            allPair.append(contentsOf: item)
+        }
+        var symbols = [String]()
+        for (_, pair) in allPair.enumerated() {
+            let infor = pair.replacingOccurrences(of: "/", with: "_")
+            if infor.count != 0 {
+                symbols.append(infor)
+            }
+        }
+        let server = TickSocket(symbols: symbols)
+        SocketManager.shared.cancelSubscribe(server: server)
+    }
+    
+    func cancelSubScriptExTick() {
+        SocketManager.shared.cancelSubscribe(server: ServerExTick() as SocketServerable)
+    }
+    
+    func cancelSubScriptExTicBTC() {
+        SocketManager.shared.cancelSubscribe(server: ServerExTicBTC() as SocketServerable)
+    }
+    
+    
+    //// 订阅法币汇率
+    func subscriptExTick() {
+        SocketManager.shared.delegate = self
+        let server = ServerExTick()
+        SocketManager.shared.subscribe(server: server)
+    }
+    
+    //// 订阅BTC汇率
+    func subscriptExTicBTC() {
+        SocketManager.shared.delegate = self
+        let server = ServerExTicBTC()
+        SocketManager.shared.subscribe(server: server)
+    }
+    
     
     func tradeInfoModel(tradeCode: String) -> TradeInfoModel?{
          for model in self.coinPairsModels {
@@ -151,22 +214,51 @@ extension APPTransactionPair: SocketManagerDelegate {
     
     /// 获取数字货币兑法币的汇率
     func socket(didReadExTick data: [String : Any]) {
-        self.exTickDatas = Mapper<ExTickModels>().map(JSON: data)
+        self.exTickDatasVariable.value = Mapper<ExTickModels>().map(JSON: data) ?? ExTickModels()
     }
     
-    //    /// 获取数字币兑BTC的汇率
+    /// 获取数字币兑BTC的汇率
     func socket(didReadExTicBTC data: [String : Any]) {
-        self.exTickBTCDatas = Mapper<ExTickBTCModels>().map(JSON: data)
+        self.exTickBTCDatasVariable.value = Mapper<ExTickBTCModels>().map(JSON: data) ?? ExTickBTCModels()
     }
     
     /// 数字货币行情
     func socket(didReadTick data: [String : Any]) {
         let tickResponse = Mapper<TickRequestModel>().map(JSON: data)
-        let mainCoin = tickResponse?.datas?[0].coinPairLastName
-        if let mainCoin = mainCoin {
-            self.coinMarketDicVariable.value[mainCoin] = tickResponse?.datas
+        let cmd = tickResponse?.cmd
+        if cmd == CmdType.tick.rawValue {  //tick
+            let mainCoin = tickResponse?.symbol.components(separatedBy: "_").last
+            if let mainCoin = mainCoin {
+                let models = coinMarketDicVariable.value[mainCoin]
+                for model in coinMarketDicVariable.value[mainCoin] ?? [] {
+                    if model.symbol == tickResponse?.symbol {
+                        model.price = tickResponse?.data?.price ?? ""
+                        model.amount = tickResponse?.data?.amount ?? ""
+                        model.day_high = tickResponse?.data?.day_high ?? ""
+                        model.day_open = tickResponse?.data?.day_open ?? ""
+                        model.day_low = tickResponse?.data?.day_low ?? ""
+                        model.day_volume = tickResponse?.data?.day_volume ?? ""
+                        
+                        let index = models?.index {$0.symbol == model.symbol}
+                        self.coinValueChangeIndexVariable.value = [mainCoin:index] as! [String : Int]
+                    }
+                }
+            }
+        }else { //ticks
+            var array = [String: [TickModel]]()
+            for model in tickResponse?.datas ?? [] {
+                if let mainCoin = model.coinPairLastName {
+                    
+                    if array.keys.contains(mainCoin) == false{
+                        array.updateValue([], forKey: mainCoin)
+                    }
+                    array[mainCoin]?.append(model)
+                }
+            }
+            if array.count != 0 {
+                self.coinMarketDicVariable.value = array
+            }
         }
     }
-    
 }
 

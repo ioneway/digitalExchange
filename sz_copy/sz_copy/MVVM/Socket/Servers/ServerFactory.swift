@@ -11,7 +11,7 @@ import Foundation
 
 class ServerFactory {
     
-   var serverStatus: ServerStatus = .szRelese
+    var serverStatus: ServerStatus = .szRelese
     
     static let  `default` = ServerFactory()
     

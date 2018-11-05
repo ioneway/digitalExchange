@@ -18,9 +18,8 @@ class MineViewController: BaseViewController<MineViewModel>, UITableViewDataSour
         let backView = UIView()
         backView.backgroundColor = ColorAsset.BackGround.Level3.color
         temp.backgroundView = backView
-        temp.separatorInset = UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15)
         temp.tableHeaderView = MineHeaderView()
-        temp.tableHeaderView?.height = 106 + kNavi_HEIGHT
+        temp.tableHeaderView?.height = 106
         temp.tableFooterView = UIView.init(frame: .zero)
         temp.registerClass(MineTableViewCell.self)
         return temp
@@ -41,12 +40,18 @@ class MineViewController: BaseViewController<MineViewModel>, UITableViewDataSour
         if #available(iOS 11.0, *) {
             _tableview.contentInsetAdjustmentBehavior = .never
         }
+        
+        let item = UIBarButtonItem(image: ImgAsset.setting.image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(naviBtnClick))
+        self.navigationItem.rightBarButtonItem = item
+        
+        
+        
         setupUI()
         configConstraints()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        
     }
     
     override func setupUI() {
@@ -59,6 +64,11 @@ class MineViewController: BaseViewController<MineViewModel>, UITableViewDataSour
         _tableview.snp.makeConstraints{ make in
             make.left.top.bottom.right.equalToSuperview()
         }
+    }
+    
+    /// 导航栏按钮点击
+    @objc func naviBtnClick() {
+        //进入设置页面
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

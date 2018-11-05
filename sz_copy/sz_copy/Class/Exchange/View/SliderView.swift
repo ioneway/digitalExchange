@@ -15,9 +15,16 @@ class SliderView: UIView {
     /// 滑动比例值，（0...1）
     public var _value: CGFloat = 0.0
     
-    public var minValue = 0.0
+    public var minValue: String = "0"
     
-    public var maxValue = 100.0
+    public var maxValue: String {
+        set {
+            maxLabel.text = newValue
+        }
+        get {
+            return maxLabel.text ?? "--"
+        }
+    }
     
     /// 竹节数
     public var nodeCount = 4
@@ -41,6 +48,22 @@ class SliderView: UIView {
     private var _lineBaseTag = 1000
     
     private var tempLine = UIView()
+    
+    private var minLabel: UILabel = {
+        let temp = UILabel()
+        temp.font = FontAsset.HelveticaNeue_Light.size(.Level10)
+        temp.textColor = ColorAsset.Text.Level3.color
+        temp.text = "0"
+        return temp
+    }()
+    
+    private lazy var maxLabel: UILabel = {
+        let temp = UILabel()
+        temp.font = FontAsset.HelveticaNeue_Light.size(.Level10)
+        temp.textColor = ColorAsset.Text.Level3.color
+        temp.text = "--"
+        return temp
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,6 +110,17 @@ class SliderView: UIView {
             make.height.equalTo(lineHeight)
             make.centerY.equalTo(nodeDiam/2.0)
         }
+        
+        self.addSubview(minLabel)
+        minLabel.snp.makeConstraints{ (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(nodeView(index: 0)!.snp.bottom).offset(3)
+        }
+        self.addSubview(maxLabel)
+        maxLabel.snp.makeConstraints{ (make) in
+            make.right.equalToSuperview()
+            make.centerY.equalTo(minLabel)
+        }
     }
     
     override func layoutSubviews() {
@@ -110,6 +144,16 @@ class SliderView: UIView {
                 make.height.equalTo(lineHeight)
                 make.centerY.equalTo(nodeDiam/2.0)
             }
+        }
+        
+        minLabel.snp.updateConstraints{ (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(nodeView(index: 0)!.snp.bottom).offset(3)
+        }
+        
+        maxLabel.snp.updateConstraints{ (make) in
+            make.right.equalToSuperview()
+            make.centerY.equalTo(minLabel)
         }
     }
     
@@ -244,5 +288,6 @@ extension SliderView {
     }
     
 }
+
 
 

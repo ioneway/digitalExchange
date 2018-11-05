@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct ServerExRate: SocketServerable {
+struct ServerExRate: SocketSubscribeServerable {
+    var isCancel: Bool = false
     var cmd: CmdType = .exRate
     var writeDict: [String : Any] {
         return ["cmd":cmd.rawValue]

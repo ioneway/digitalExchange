@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct ServerHeartBeat: SocketServerable {
+struct ServerHeartBeat: SocketSubscribeServerable {
+    var isCancel: Bool = false
     var cmd: CmdType = .ping
     var isNeedUserId:Bool = false
     var writeDict: [String : Any] {

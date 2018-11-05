@@ -33,9 +33,17 @@ class MarketTableViewCell: UITableViewCell {
         
         let view = UIView(frame: self.bounds)
         view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        self.selectedBackgroundView = UIView(frame: self.bounds)
-        self.selectedBackgroundView?.backgroundColor = ColorAsset.Block.Red.color
         self.coinImageView.contentScaleFactor = UIScreen.main.scale
+        contentView.backgroundColor = ColorAsset.BackGround.Level3.color
+        self.backgroundColor = ColorAsset.BackGround.Level3.color
+        
+        firstVavityName.textColor = ColorAsset.Text.Level1.color
+        lastVavityName.textColor = ColorAsset.Text.Level6.color
+        hourIncrease.textColor = ColorAsset.Text.Level4.color
+        lastPrice.textColor = ColorAsset.Text.Level1.color
+        exchangeLastPrice.textColor = ColorAsset.Text.Level4.color
+        
+        increase.textColor = ColorAsset.Text.Level1.color
     }
 
     
@@ -47,7 +55,6 @@ class MarketTableViewCell: UITableViewCell {
         
         self.firstVavityName.text = model.coinPairFirstName
         self.lastVavityName.text = "/" + (model.coinPairLastName ?? "")
-        
         let tradeInfoModel = APPTransactionPair.default.tradeInfoModel(tradeCode: model.coinPairLastName ?? "")
         let price = model.price.decimal.roundStr_down(tradeInfoModel?.priceDigit ?? 8)
         self.lastPrice.text = price
@@ -55,16 +62,15 @@ class MarketTableViewCell: UITableViewCell {
         self.hourIncrease.text = "24H \(model.day_volume.km)"
         self.increase.backgroundColor = UIColor.clear
         
-        if model.day_open.decimal > 0.decimal {
+        if model.day_open.decimal <= 0.decimal {
             self.increase.text = "--"
         }else {
             let tempincrease = (model.price.decimal - model.day_open.decimal) * 100.decimal / model.day_open.decimal
             let increase = tempincrease.roundStr_plain(2, suffixZero: true).decimal
+            self.increase.text = increase.string+"%"
             if increase > 0.decimal {
-                self.increase.text = increase.roundStr_plain(2, suffixZero: true)
-                self.increase.backgroundColor = ColorAsset.Block.Drop.color
+                self.increase.backgroundColor = ColorAsset.Block.Increase.color
             }else if increase < 0.0.decimal {
-                self.increase.text = increase.roundStr_plain(2, suffixZero: true)
                 self.increase.backgroundColor = ColorAsset.Block.Drop.color
             }else{
                 self.increase.text = "0.00%"
@@ -76,6 +82,7 @@ class MarketTableViewCell: UITableViewCell {
         let url = APPTransactionPair.default.allCoinDetailModel?[model.coinPairFirstName ?? ""]?.logoUrl
         self.coinImageView.sd_setImage(with: URL(string: url ?? ""), placeholderImage:ImgAsset.coinDefault.image)
         
+        self.selectionStyle = .none
     }
   
     

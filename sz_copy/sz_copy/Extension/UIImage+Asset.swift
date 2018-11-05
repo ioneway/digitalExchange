@@ -50,6 +50,9 @@ extension UIImage {
         case security = "Security"
         case gift = "gift"
         case digitalNode = "digitalNode"
+        case arrow_right_big = "arrow_right_big"
+        case setting = "setting"
+        case cornerStone = "CornerSotone"
         
         var image: UIImage {
             return UIImage(asset: self)

@@ -13,14 +13,18 @@ import Alamofire
 
 @objc protocol SocketManagerDelegate {
     @objc optional func socket(didRead data: [String:Any])
-    @objc optional func socket(didReadTick data: [String:Any])
-    @objc optional func socket(didReadChart data: [String:Any])
-    @objc optional func socket(didReadDepth data: [String:Any])
-    @objc optional func socket(didReadExRate data: [String:Any])
-    @objc optional func socket(didReadExTick data: [String:Any])
-    @objc optional func socket(didReadExTicBTC data: [String:Any])
-    @objc optional func socketError()
+        @objc optional  func socket(didReadTick data: [String:Any])
+      @objc optional func socket(didReadChart data: [String:Any])
+      @objc optional func socket(didReadDepth data: [String:Any])
+      @objc optional func socket(didReadExRate data: [String:Any])
+     @objc optional  func socket(didReadExTick data: [String:Any])
+      @objc optional func socket(didReadExTicBTC data: [String:Any])
+      @objc optional func socketError()
 }
+
+
+
+
 
 class SocketManager: NSObject {
     
@@ -93,7 +97,10 @@ class SocketManager: NSObject {
                 cancelSubscribe(server: cacheServer)
             }
         }
+        
+//        let paramsStr = server.writeDict.removeValue(forKey: "channel")
         subscribePool.updateValue(server, forKey: server.cmd.rawValue)
+        
         write(server: server)
     }
     

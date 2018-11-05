@@ -12,10 +12,17 @@ import RxSwift
 
 let kHomeViewPagingBarHeight: CGFloat = 35
 
-class HomeViewController: BaseViewController<HomeViewModel>{
+class HomeViewController: BaseViewController<HomeViewModel>, UIScrollViewDelegate{
     
-    private var _options: PagingMenuControllerCustomizable!
+    private var _options: HomeMenuOptions!
     private var _pagingVC: PagingMenuController!
+    private lazy var sview: UIView = {
+        let temp = UIView()
+//        temp.frame = self.view.bounds
+        temp.height = 10000
+        temp.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        return temp
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +39,18 @@ class HomeViewController: BaseViewController<HomeViewModel>{
             if value.count == 0 {
                 return
             }
-            self._options = PagingMenuOptions()
+            
+            self.viewModel?.subscriptSocketServer()
+            
+            self._options = HomeMenuOptions()
             self._pagingVC = PagingMenuController.init(options: self._options)
+            self._pagingVC.view.backgroundColor = self.view.backgroundColor
             self.addChildViewController(self._pagingVC)
             let pagingMenuController = self.childViewControllers.first as! PagingMenuController
             pagingMenuController.setup(self._options)
             self.contentScroll.addSubview(self._pagingVC.view)
             self._pagingVC.view.snp.makeConstraints{ make in
-                make.top.equalTo(self.miniView.snp.bottom).offset(35)
+                make.top.equalTo(self.miniView.snp.bottom).offset(25)
                 make.height.equalTo(kSCREEN_HEIGHT - kNavi_HEIGHT - kHomeViewPagingBarHeight)
                 make.left.equalToSuperview()
                 make.right.equalToSuperview()
@@ -49,7 +60,6 @@ class HomeViewController: BaseViewController<HomeViewModel>{
         }).disposed(by: _disposeBag)
         
         self.view.addSubview(navView)
-        
     }
     
     internal override func configConstraints() {
@@ -77,6 +87,13 @@ class HomeViewController: BaseViewController<HomeViewModel>{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+       viewModel?.subscriptSocketServer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel?.cancelSocketServer()
     }
     
     internal override func bindViewModel() {
@@ -103,6 +120,24 @@ class HomeViewController: BaseViewController<HomeViewModel>{
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if contentScroll == scrollView {
+            if contentScroll.contentOffset.y < 400 {
+                if sview.superview == nil {
+                    self.contentScroll.addSubview(sview)
+                }
+            }else {
+                sview.removeFromSuperview()
+            }
+            
+            let rect = _pagingVC.view.convert(_pagingVC.view.bounds, to: AppDelegate.default.window)
+            log ("=======\(rect)")
+            if (rect.minY <= 89) {
+                //                scrollView.contentOffset.y = 0
+            }
+        }
+    }
+    
     //容器Scroll
     private lazy var contentScroll: UIScrollView = {
         let scroll = UIScrollView()
@@ -111,6 +146,7 @@ class HomeViewController: BaseViewController<HomeViewModel>{
         scroll.showsVerticalScrollIndicator = false
         scroll.showsHorizontalScrollIndicator = false
         scroll.contentInsetAdjustmentBehavior = .never
+        scroll.delegate = self
         return scroll
     }()
     
@@ -149,7 +185,7 @@ class HomeViewController: BaseViewController<HomeViewModel>{
 }
 
 
-struct PagingMenuOptions: PagingMenuControllerCustomizable {
+struct HomeMenuOptions: PagingMenuControllerCustomizable {
     
    static var marketVM_0: MarketTableViewModel =  {
         let temp = MarketTableViewModel()
@@ -167,9 +203,9 @@ struct PagingMenuOptions: PagingMenuControllerCustomizable {
         return temp
     }()
     
-    let marketVC_0 = Router.viewController(marketVM_0) as! MarketTableViewController
-    let marketVC_1 = Router.viewController(marketVM_1) as! MarketTableViewController
-    let marketVC_2 = Router.viewController(marketVM_2) as! MarketTableViewController
+   public var marketVC_0 = Router.viewController(marketVM_0) as! MarketTableViewController
+   public var marketVC_1 = Router.viewController(marketVM_1) as! MarketTableViewController
+   public var marketVC_2 = Router.viewController(marketVM_2) as! MarketTableViewController
     
     var componentType: ComponentType {
         return .all(menuOptions: MenuOptions(), pagingControllers: [marketVC_0, marketVC_1, marketVC_2])

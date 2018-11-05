@@ -8,7 +8,8 @@
 
 import UIKit
 //数字货币兑BTC价格
-struct ServerExTicBTC: SocketServerable {
+struct ServerExTicBTC: SocketSubscribeServerable {
+    var isCancel: Bool = false
     var cmd: CmdType = .exTicBTC
     var channel: String = "add"
     

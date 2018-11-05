@@ -11,7 +11,7 @@ import UIKit
 class WebViewModel: BaseViewModel {
     
     override init() {
-        super.init(vcName: WebViewController.className)
+        super.init(vcName: WebViewController.wholeClassName)
     }
     
 }

@@ -76,10 +76,10 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = ColorAsset.BackGround.Level3.color
         viewModel?.exchangeDirectionVariable.value = .sell
         viewModel?.priceTypeVariable.value = .market
-        
+        viewModel?.maxExchangeVariable.value = "1000.99932932(BTC)"
         if #available(iOS 11.0, *) {
             _contentScroll.contentInsetAdjustmentBehavior = .never
         }
@@ -105,7 +105,7 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
         
         _exchangeDirectionControl.snp.makeConstraints{ make in
             make.width.equalTo(190.x)
-            make.top.equalToSuperview().offset(15 + kNavi_HEIGHT)
+            make.top.equalToSuperview().offset(15)
             make.height.equalTo(34)
             make.left.equalToSuperview().offset(15.x)
         }
@@ -169,13 +169,11 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
             self._currencyPriceLabel.text = result
         }
         
-        /// 数量输入框的双向绑定
-//        let _ = _numberInputView.textVariable <-> (viewModel?.numberVariable ?? Variable(""))
-        
         let _ = _numberInputView.textVariable.asObservable().bind { result in
             self.viewModel?.numberVariable.value = result
+            let num = self._viewModel?.maxExchangeVariable.value.extractNum().decimal.doubleValue ?? 0
             if result.decimal.decimalValue != Decimal.nan {
-                        self._sliderView.value = CGFloat((result.decimal / 1000.decimal).doubleValue)
+                        self._sliderView.value = CGFloat((result.decimal / num.decimal).doubleValue)
                     }
         }
         
@@ -184,22 +182,22 @@ class ExchangeViewController: BaseViewController<ExchangeViewModel> {
             self._numberInputView.coinName = result
         }
         
-//        /// 绑定：当viewmodel对应值发生变化时，sliderView的值变化
-//        let _ = viewModel?.numberVariable.asObservable().bind { result in
-//            if result.decimal.decimalValue != Decimal.nan{
-//                self._sliderView.value = CGFloat((result.decimal / 1000.decimal).doubleValue)
-//            }
-//        }
-        
         /// 绑定：当sliderView的值变化时，数量输入框的值变化，同时viewmodel对应值随同变化，
         let _ = _sliderView.valueVariable.asObservable().bind { result in
-            self._numberInputView.text = Double(result*CGFloat(1000)).decimal.string
-            self._viewModel?.numberVariable.value = Double(result*CGFloat(1000)).decimal.string
+            let num = self._viewModel?.maxExchangeVariable.value.extractNum().decimal.doubleValue ?? 0
+            self._numberInputView.text = Double(result*CGFloat(num)).decimal.string
+            self._viewModel?.numberVariable.value = Double(result * CGFloat(num)).decimal.string
         }
         
         /// 可用币数额的绑定
         let _ = viewModel?.canUseNumVariable.asObservable().bind { result in
             self._canUseCoinNumLabel.text = result
+        }
+        
+        /// 滑动杆右下侧绑定
+        let _ = viewModel?.maxExchangeVariable.asObservable().bind{ result in
+            self._sliderView.maxValue = result
+            
         }
     }
 }

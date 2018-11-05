@@ -19,6 +19,7 @@ class HomeNavigationView: UIView {
         self.scroll?.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
         self.addSubview(titleLabel)
         titleLabel.center = self.center
+        titleLabel.centerY = self.centerY+10
     }
     
     override init(frame: CGRect) {

@@ -10,7 +10,8 @@ import UIKit
 
 //注册图表数据推送，period：1 5 60 ...分别代表多少分种间隔的k线
 //bar：数量
-struct ServerChart: SocketServerable {
+struct ServerChart: SocketSubscribeServerable {
+    var isCancel: Bool = false
     var cmd: CmdType = .chart
     var symbol: String = "BTC_USDT"
     var period: Int = 1

@@ -85,8 +85,8 @@ extension String {
     func extractNum() -> String {
         let scanner = Scanner(string: self)
         scanner.scanUpToCharacters(from: CharacterSet.decimalDigits, into: nil)
-        var number :Int = 0
-        scanner.scanInt(&number)
+        var number :Double = 0
+        scanner.scanDouble(&number)
         return String(number)
     }
     

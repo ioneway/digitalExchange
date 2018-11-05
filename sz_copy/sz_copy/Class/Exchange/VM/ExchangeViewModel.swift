@@ -78,6 +78,9 @@ class ExchangeViewModel: BaseViewModel {
     /// 交易币种，币种一
     var coinCodeVariable: Variable<String> = Variable<String>("SZ")
     
+    /// 交易最大量：滑动杆右下侧的数据
+    var maxExchangeVariable: Variable<String> = Variable<String>("--")
+    
 //    var
 
     override init() {

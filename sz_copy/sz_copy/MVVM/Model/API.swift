@@ -81,3 +81,5 @@ private func JSONResponseDataFormatter(_ data: Data) -> Data {
 }
 
 let SZProvider = MoyaProvider<API>(plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
+
+

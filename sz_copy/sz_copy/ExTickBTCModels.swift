@@ -18,7 +18,7 @@ extension DefaultsKeys {
 final class ExTickBTCModels: Mappable, Codable, DefaultsSerializable  {
     private(set) var cmd: String?
     private(set) var data: [String: Double]?
-    private(set) var code: Int = -1
+    private(set) var code: Int?
     
     required init?(map: Map) {
         NotificationCenter.default.addObserver(self, selector: #selector(write), name: .UIApplicationDidEnterBackground, object: nil)
@@ -27,7 +27,7 @@ final class ExTickBTCModels: Mappable, Codable, DefaultsSerializable  {
     public init() {
         let models = Defaults[.exTickBTCModels]
         data = models?.data
-        code = (models?.code)!
+        code = models?.code
     }
     
     func mapping(map: Map)

@@ -44,13 +44,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sz_copy/Class/Mine/Model/AllTradeInfoRequireModel.swift"
-            timestampString = "560780595.708294"
+            timestampString = "561982701.346292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
             endingLineNumber = "108"
             landmarkName = "mapping(map:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/Moya/Sources/Moya/MoyaError.swift"
+            timestampString = "561647324.523967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "errorDescription"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

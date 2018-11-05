@@ -70,7 +70,6 @@ class NumberInputView: UIView {
         }
     }
     
-    
     private var _coinName: String = "SZ"
     
     /// 币种代码
@@ -98,6 +97,4 @@ class NumberInputView: UIView {
     public lazy var textVariable = {
         return textField.rx.text.orEmpty
     }()
-    
-   
 }

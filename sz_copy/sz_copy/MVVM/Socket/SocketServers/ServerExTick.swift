@@ -7,8 +7,9 @@
 //
 
 import UIKit
-//数字货币兑法币价格
-struct ServerExTick: SocketServerable {
+//数字货币兑法币价格, 每次都是全量发送
+struct ServerExTick: SocketSubscribeServerable {
+    var isCancel: Bool = false
     var cmd: CmdType = .exTick
     
     var symbols: [String] = ["BTC","ETH","EOS"]

@@ -15,8 +15,6 @@ import Moya
 import Moya_ObjectMapper
 import ObjectMapper
 
-
-
 class MarketTableViewModel: BaseViewModel {
     
     public var coinName = ""
@@ -35,15 +33,15 @@ class MarketTableViewModel: BaseViewModel {
     
     override init() {
         super.init(vcName: MarketTableViewController.wholeClassName)
+        
+        bundingData()
     }
     
     override func initialize() {
         
     }
     
-    func subscriptTickMarket() {
-        APPTransactionPair.default.subscriptTickServer(coinName: coinName)
-        
+    func bundingData() {
         let _ = APPTransactionPair.default.coinMarketDicVariable.asObservable().bind{ result in
             self.dataSource = result[self.coinName] ?? [TickModel]()
         }

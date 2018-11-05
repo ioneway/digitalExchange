@@ -20,6 +20,8 @@ extension UIColor {
             case Level2 = "#232939"
             case Level3 = "#191D29"
             case Level4 = "#121621"  //Tabbar颜色
+            case Level5 = "#1E2331"  //交易首页导航栏
+            
             
             var color : UIColor {
                 return UIColor(hexStr: self.rawValue)
@@ -31,8 +33,8 @@ extension UIColor {
             case Level2 = "#93A2B8"
             case Level3 = "#667791"
             case Level4 = "#4B5A71"
-            
             case Level5 = "#AFB9C8"
+            case Level6 = "#7D8CA5"
             
             var color : UIColor {
                 return UIColor(hexStr: self.rawValue)

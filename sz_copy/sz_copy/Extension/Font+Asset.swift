@@ -325,6 +325,10 @@ enum FontSize: CGFloat {
     case Level24 = 24.0
     case Level25 = 25.0
     case Level26 = 26.0
+    case Level27 = 27.0
+    case Level28 = 28.0
+    case Level29 = 29.0
+    case Level30 = 30.0
     
 }
 

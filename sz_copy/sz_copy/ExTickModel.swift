@@ -34,7 +34,7 @@ final class ExTickModels:  Mappable, Codable, DefaultsSerializable {
     
     private(set) var cmd: String?
     private(set) var data: [ExTickModel]?
-    private(set) var code: Int = -1
+    private(set) var code: Int?
     
     required init?(map: Map) {
         NotificationCenter.default.addObserver(self, selector: #selector(write), name: .UIApplicationDidEnterBackground, object: nil)
@@ -44,7 +44,7 @@ final class ExTickModels:  Mappable, Codable, DefaultsSerializable {
        let models = Defaults[.exTickModels]
         cmd = models?.cmd
         data = models?.data
-        code = (models?.code)!
+        code = models?.code
     }
     
     func mapping(map: Map)
@@ -60,8 +60,8 @@ final class ExTickModels:  Mappable, Codable, DefaultsSerializable {
             //当“SZ”时，后台数据可能没有返回法币汇率，所以先转换为BTC汇率然后乘BTC法币汇率
             var rate = 1.0.decimal
             if coin.lowercased() == "SZ".lowercased() && currentExTicModel()?.symbols?[coin] == nil{
-                if APPTransactionPair.default.exTickBTCDatas != nil {
-                    if let szTick = APPTransactionPair.default.exTickBTCDatas?["SZ"]{
+                if APPTransactionPair.default.exTickBTCDatasVariable.value != nil {
+                    if let szTick = APPTransactionPair.default.exTickBTCDatasVariable.value["SZ"]{
                         let btcRate = self["BTC"]
                         rate = szTick * btcRate!
                     }

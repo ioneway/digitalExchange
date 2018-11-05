@@ -10,11 +10,13 @@ import ObjectMapper
 import RealmSwift
 
 class TickRequestModel: Mappable {
-    private(set) var channel: String = ""
-    private(set) var cmd: String = ""
-    private(set) var code: Int = -1
-    private(set) var datas: [TickModel]?
-    private(set) var symbols: [String]?
+    var channel: String = ""
+     var cmd: String = ""
+     var code: Int = -1
+     var datas: [TickModel]?
+     var data: TickModel?
+     var symbols: [String]?
+    var symbol: String = ""
     required init?(map: Map) {}
     
     func mapping(map: Map)
@@ -23,32 +25,35 @@ class TickRequestModel: Mappable {
         cmd <- map["cmd"]
         code <- map["code"]
         datas <- map["datas"]
+        data <- map["data"]
+        symbols <- map["symbols"]
+        symbol <- map["symbol"]
         
-        for model in datas ?? [] {
-            if model.name == "" {
-                model.name = symbols?.last ?? ""
-            }
-        }
+//        for model in datas ?? [] {
+//            if model.name == "" {
+//                model.name = symbols?.last ?? ""
+//            }
+//        }
     }
 }
 
-class TickModel:  Object, Mappable{
+class TickModel: Mappable, CustomDebugStringConvertible{
     @objc  dynamic var  name: String = ""    //名字
-    @objc private(set) dynamic var  day_volume: String = "0.00"     //24h量
-    @objc private(set) dynamic var  price: String = "0.00" //当前价格
+    @objc  dynamic var  day_volume: String = "0.00"     //24h量
+    @objc  dynamic var  price: String = "0.00" //当前价格
     
-    @objc private(set) dynamic var  day_open: String = "0.00"  //开盘价
-    @objc private(set) dynamic var  day_high: String = "0.00" //最高价
-    @objc private(set) dynamic var  day_low: String = "0.00"  //最低价
-    @objc private(set) dynamic var  day_ts: Double = 0   //时间戳
-    @objc private(set) dynamic var  amount: String = "0.00"
-    @objc private(set) dynamic var  symbol: String = "0.00"
+    @objc dynamic var  day_open: String = "0.00"  //开盘价
+    @objc  dynamic var  day_high: String = "0.00" //最高价
+    @objc dynamic var  day_low: String = "0.00"  //最低价
+    @objc  dynamic var  day_ts: Double = 0   //时间戳
+    @objc  dynamic var  amount: String = "0.00"
+    @objc  dynamic var  symbol: String = ""
    
     required convenience init?(map: Map) {
         self.init()
     }
     
-    override var debugDescription: String {
+     var debugDescription: String {
         return """
         TickModel：{
         name: \(String(describing: name))
@@ -76,6 +81,7 @@ class TickModel:  Object, Mappable{
         day_ts <- map["day_ts"]
         amount <- (map["amount"], LZDoubleTransform())
         symbol <- map["symbol"]
+        name = symbol
     }
     
     var coinPairFirstName: String? {
@@ -104,7 +110,7 @@ class TickModel:  Object, Mappable{
     
     var money: String? {
         get {
-            let temp = (APPTransactionPair.default.exTickDatas?[coinPairLastName ?? ""] ?? 0.decimal) * self.price.decimal
+            let temp = (APPTransactionPair.default.exTickDatasVariable.value[coinPairLastName ?? ""] ?? 0.decimal) * self.price.decimal
             return temp.string
         }
     }

@@ -55,6 +55,20 @@ class HomeViewModel: BaseViewModel {
         viewModel.param(announcementModels![index]).push()
     }
     
+
+    ///  订阅法币汇率，btc汇率，行情服务
+    func subscriptSocketServer() {
+        APPTransactionPair.default.subscriptAllTickServer()
+            APPTransactionPair.default.subscriptExTick()
+            APPTransactionPair.default.subscriptExTicBTC()
+    }
+    
+    ///  取消法币汇率，btc汇率，行情服务
+    func cancelSocketServer() {
+       APPTransactionPair.default.cancelSubScriptExTick()
+        APPTransactionPair.default.cancelSubScriptExTicBTC()
+        APPTransactionPair.default.cancelSubScriptTickServer()
+    }
     //请求banner
     private func requirdBanner() {
         self.model.request(.Banner, BannerRequestModel.self).subscribe {[weak self] event -> Void in
