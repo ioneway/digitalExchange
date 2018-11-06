@@ -28,12 +28,6 @@ class TickRequestModel: Mappable {
         data <- map["data"]
         symbols <- map["symbols"]
         symbol <- map["symbol"]
-        
-//        for model in datas ?? [] {
-//            if model.name == "" {
-//                model.name = symbols?.last ?? ""
-//            }
-//        }
     }
 }
 

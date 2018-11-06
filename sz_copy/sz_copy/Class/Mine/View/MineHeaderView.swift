@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import NightNight
 
 class MineHeaderView: UIView {
     
@@ -21,7 +22,7 @@ class MineHeaderView: UIView {
         let temp = UILabel()
         temp.text = "ID:199****1664"
         temp.font = FontAsset.PingFangSC_Regular.size(.Level12)
-        temp.textColor = ColorAsset.Text.Level2.color
+        temp.mixedTextColor = ColorAsset.Text.Level2.mixColor
         return temp
     }()
     
@@ -35,7 +36,7 @@ class MineHeaderView: UIView {
         let temp = UILabel()
         temp.text = "199****1664"
         temp.font = FontAsset.PingFangSC_Regular.size(.Level16)
-        temp.textColor = ColorAsset.Text.Level5.color
+        temp.mixedTextColor = ColorAsset.Text.Level5.mixColor
         return temp
     }()
     
@@ -58,6 +59,7 @@ class MineHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorAsset.BackGround.Level2.color
+        mixedBackgroundColor = ColorAsset.Text.Level2.mixColor
         
         setupUI()
         configConstraints()

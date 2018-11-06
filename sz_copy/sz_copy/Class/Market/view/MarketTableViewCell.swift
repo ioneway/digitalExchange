@@ -78,7 +78,7 @@ class MarketTableViewCell: UITableViewCell {
             }
         }
         
-        self.exchangeLastPrice.text = "≈" + (model.money?.szMoneyFormat ?? "--") + UserInfo.default.currency.uppercased()
+        self.exchangeLastPrice.text = "≈" + (model.money?.szMoneyFormat ?? "--") + UserInfo.default.currency.rawValue.uppercased()
         let url = APPTransactionPair.default.allCoinDetailModel?[model.coinPairFirstName ?? ""]?.logoUrl
         self.coinImageView.sd_setImage(with: URL(string: url ?? ""), placeholderImage:ImgAsset.coinDefault.image)
         

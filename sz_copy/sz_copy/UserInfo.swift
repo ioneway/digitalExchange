@@ -8,7 +8,22 @@
 
 import UIKit
 import SwiftyUserDefaults
+import NightNight
 
+enum Language: String, Codable {
+    case english
+    case chinese
+}
+
+enum Currency: String, Codable {
+    case CNY
+    case USD
+}
+
+enum Theme: String, Codable {
+    case day
+    case night
+}
 
 extension DefaultsKeys {
     static let userInfoKey = DefaultsKey<UserInfo?>("userInfoKey")
@@ -27,12 +42,22 @@ final class UserInfo: Codable, DefaultsSerializable {
     var trustNum: Int?
     var expirationDate:Int64?
     var account:String?
-    var currency:String = "CNY" //当前法币符号 默认CNY
-    var language:String = "zh-Hans"  //当前语言 默认"zh-Hans"
+    var currency:Currency = .CNY //当前法币符号 默认CNY
+    var language:Language = .chinese  //当前语言 默认"zh-Hans"
+    
+    var theme:Theme = .night {
+        didSet {
+            if oldValue == .night {
+                NightNight.theme = .night
+            }else {
+                NightNight.theme = .normal
+            }
+        }
+    }
 
     var isEnglish: Bool {
         get {
-            if language.contains("en") {
+            if language == .english {
                 return true
             }else {
                 return false
@@ -49,6 +74,8 @@ final class UserInfo: Codable, DefaultsSerializable {
             }
         }
     }
+    
+    
     
     static let `default`: UserInfo = UserInfo()
     
@@ -70,6 +97,7 @@ final class UserInfo: Codable, DefaultsSerializable {
         self.account = obj.account
         self.currency = obj.currency
         self.language = obj.language
+        self.theme = obj.theme
     }
     
     func install(data: [String:Any]) {
@@ -100,7 +128,15 @@ final class UserInfo: Codable, DefaultsSerializable {
         if let expirationDate = data["expirationDate"] as? Int64 {
             self.expirationDate = expirationDate
         }
-
+        if let language = data["language"] as? Language {
+            self.language = language
+        }
+        if let theme = data["theme"] as? Theme {
+            self.theme = theme
+        }
+        if let currency = data["currency"] as? Currency {
+            self.currency = currency
+        }
         write()
     }
     
@@ -120,6 +156,9 @@ final class UserInfo: Codable, DefaultsSerializable {
             self.reviews = nil
             self.trustNum = nil
             self.expirationDate = nil
+            self.theme = .night
+            self.currency = .CNY
+            self.language = .english
             write()
 //            AppSecurityInfo.default.model = SecurityModel()
 //            AppSecurityInfo.default.openScreenLock(dic: [:])

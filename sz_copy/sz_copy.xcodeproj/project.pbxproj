@@ -100,6 +100,10 @@
 		4A4E990821522F830093A97F /* MiningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E990621522F830093A97F /* MiningViewController.swift */; };
 		4A4E990B21522F900093A97F /* MarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E990921522F8F0093A97F /* MarketViewModel.swift */; };
 		4A4E990C21522F900093A97F /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E990A21522F900093A97F /* MarketViewController.swift */; };
+		4A53D2CF21902404007BDD44 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A53D2CE21902404007BDD44 /* GlobalFunction.swift */; };
+		4A53D2D1219034F1007BDD44 /* SocketTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A53D2D0219034F1007BDD44 /* SocketTools.swift */; };
+		4A53D2D6219068F4007BDD44 /* night.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A53D2D4219068F3007BDD44 /* night.json */; };
+		4A53D2D7219068F4007BDD44 /* day.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A53D2D5219068F4007BDD44 /* day.json */; };
 		4A5451D0216E17C1003E3CB2 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5451CF216E17C1003E3CB2 /* UITableView+Extension.swift */; };
 		4A5451D2216E2BBB003E3CB2 /* MarketTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5451D1216E2BBB003E3CB2 /* MarketTableViewModel.swift */; };
 		4A5451D421707652003E3CB2 /* keychain-access-groups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A5451D321707652003E3CB2 /* keychain-access-groups.plist */; };
@@ -244,6 +248,10 @@
 		4A4E990621522F830093A97F /* MiningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiningViewController.swift; sourceTree = "<group>"; };
 		4A4E990921522F8F0093A97F /* MarketViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketViewModel.swift; sourceTree = "<group>"; };
 		4A4E990A21522F900093A97F /* MarketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
+		4A53D2CE21902404007BDD44 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		4A53D2D0219034F1007BDD44 /* SocketTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTools.swift; sourceTree = "<group>"; };
+		4A53D2D4219068F3007BDD44 /* night.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = night.json; sourceTree = "<group>"; };
+		4A53D2D5219068F4007BDD44 /* day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = day.json; sourceTree = "<group>"; };
 		4A5451CF216E17C1003E3CB2 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		4A5451D1216E2BBB003E3CB2 /* MarketTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableViewModel.swift; sourceTree = "<group>"; };
 		4A5451D321707652003E3CB2 /* keychain-access-groups.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "keychain-access-groups.plist"; sourceTree = "<group>"; };
@@ -384,6 +392,7 @@
 				4A1702582154D48D00ADAB90 /* ServerHeartBeat.swift */,
 				4A1702592154D48D00ADAB90 /* ServerExTicBTC.swift */,
 				4A17025A2154D48D00ADAB90 /* ServerChart.swift */,
+				4A53D2D0219034F1007BDD44 /* SocketTools.swift */,
 			);
 			path = SocketServers;
 			sourceTree = "<group>";
@@ -722,6 +731,8 @@
 			isa = PBXGroup;
 			children = (
 				4ACFCA4421725A320037F902 /* README.md */,
+				4A53D2D5219068F4007BDD44 /* day.json */,
+				4A53D2D4219068F3007BDD44 /* night.json */,
 				4A5451D321707652003E3CB2 /* keychain-access-groups.plist */,
 				4A69CC102146A4FB007B9033 /* sz_copy */,
 				4A69CC252146A4FD007B9033 /* sz_copyTests */,
@@ -766,6 +777,7 @@
 				4A4E1B25215E318600A09CC5 /* WebViewModel.swift */,
 				4A5B1567216CABBC0054443C /* APPTransactionPair.swift */,
 				4A5B1569216CACD00054443C /* APPTransactionPairViewModel.swift */,
+				4A53D2CE21902404007BDD44 /* GlobalFunction.swift */,
 			);
 			path = sz_copy;
 			sourceTree = "<group>";
@@ -875,10 +887,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A53D2D6219068F4007BDD44 /* night.json in Resources */,
 				4A69CC1C2146A4FC007B9033 /* LaunchScreen.storyboard in Resources */,
 				4A69CC192146A4FC007B9033 /* Assets.xcassets in Resources */,
 				4A69CC172146A4FB007B9033 /* Main.storyboard in Resources */,
 				4A5B1566216C9E650054443C /* MarketTableViewCell.xib in Resources */,
+				4A53D2D7219068F4007BDD44 /* day.json in Resources */,
 				4A5451D421707652003E3CB2 /* keychain-access-groups.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -907,6 +921,7 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/NightNight/NightNight.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
@@ -932,6 +947,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NightNight.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
@@ -1054,6 +1070,7 @@
 				4A4E990B21522F900093A97F /* MarketViewModel.swift in Sources */,
 				4A4E990821522F830093A97F /* MiningViewController.swift in Sources */,
 				4A0822CB21784FF1002A6997 /* SliderView.swift in Sources */,
+				4A53D2D1219034F1007BDD44 /* SocketTools.swift in Sources */,
 				4A1702612154D48D00ADAB90 /* ServerExTick.swift in Sources */,
 				4A4E98B8214FD1920093A97F /* ViewModelService.swift in Sources */,
 				4A4E98F32150F0ED0093A97F /* Double.swift in Sources */,
@@ -1111,6 +1128,7 @@
 				4A4E98F72150F0ED0093A97F /* Font+Asset.swift in Sources */,
 				4A1702662154D48D00ADAB90 /* ServiceSocketManager.swift in Sources */,
 				4A4E98E62150F0ED0093A97F /* Global.swift in Sources */,
+				4A53D2CF21902404007BDD44 /* GlobalFunction.swift in Sources */,
 				4ACFCA492172F6250037F902 /* DropDownBtn.swift in Sources */,
 				4A5B155F216C77F50054443C /* Pagable.swift in Sources */,
 				4A4E98F02150F0ED0093A97F /* UIView+layout.swift in Sources */,

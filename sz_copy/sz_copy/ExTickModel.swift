@@ -85,7 +85,7 @@ final class ExTickModels:  Mappable, Codable, DefaultsSerializable {
             return nil
         }
         for model in data {
-            if model.money?.lowercased() == UserInfo.default.currency.lowercased() {
+            if model.money?.lowercased() == UserInfo.default.currency.rawValue.lowercased() {
                 return model
             }
         }

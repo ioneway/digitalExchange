@@ -39,30 +39,35 @@ class TickServer: NSObject, SocketManagerDelegate {
     
     public var dicVariable : Variable<[String: TickModel]> = Variable<[String: TickModel]>([:])
     static let `default`: TickServer = TickServer()
+    private var coinPairs: [String] = [String]()
     
     /// 订阅服务
-    func subscriptTick(coinPairs: [String] ) {
+    func subscriptTick(pairs: [String] ) {
         var symbols = [String]()
-        for (_, pair) in (coinPairs.enumerated()) {
+        
+        for (_, pair) in (pairs.enumerated()) {
             let infor = pair.replacingOccurrences(of: "/", with: "_")
             if infor.count != 0 {
                 symbols.append(infor)
+                
             }
         }
-        let server = TickSocket(symbols: symbols)
+        coinPairs.append(contentsOf: symbols)
+        let server = TickSocket(symbols: coinPairs)
         SocketManager.shared.delegate = self
         SocketManager.shared.subscribe(server: server)
     }
     
     /// 取消服务
-    func cancelSubscript(coinPairs: [String]) {
+    func cancelSubscript(pairs: [String]) {
         var symbols = [String]()
-        for (_, pair) in (coinPairs.enumerated()) {
+        for (_, pair) in (pairs.enumerated()) {
             let infor = pair.replacingOccurrences(of: "/", with: "_")
             if infor.count != 0 {
                 symbols.append(infor)
             }
         }
+        
         var server = TickSocket(symbols: symbols)
         server.symbols = symbols
         SocketManager.shared.cancelSubscribe(server: server)

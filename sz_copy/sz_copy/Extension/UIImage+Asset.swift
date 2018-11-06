@@ -11,10 +11,20 @@ https://github.com/AliSoftware/SwiftGen 在电脑上安装这个工具，自动�
 */
 
 
-typealias ImgAsset = UIImage.Asset
+
 
 import Foundation
 import UIKit
+import NightNight
+
+typealias ImgAsset = UIImage.Asset
+
+extension MixedImage {
+    public convenience init(asset: String) {
+        self.init(normal: UIImage(named: asset)!, night: UIImage(named:asset+"_night")!)
+    }
+}
+
 
 extension UIImage {
     enum Asset : String {
@@ -57,11 +67,17 @@ extension UIImage {
         var image: UIImage {
             return UIImage(asset: self)
         }
+        
+        public var mixImg: MixedImage {
+            return MixedImage.init(asset: self.rawValue)
+        }
     }
     
     convenience init!(asset: Asset) {
         self.init(named: asset.rawValue)
     }
+    
+    
 }
 
 /****使用*****/

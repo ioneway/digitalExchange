@@ -23,7 +23,7 @@ target 'sz_copy' do
   pod 'SDCycleScrollView'
   pod 'SnapKit'
   pod 'Simple-KeychainSwift'
-
+  pod 'NightNight'
   
   # Pods for sz_copy
 

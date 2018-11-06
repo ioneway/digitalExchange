@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //开启定位，获取位置
 //        LocationManager.default.startLocation()
-        TickServer.default.subscriptTick(coinPairs: ["ETH_BTC"])
+        TickServer.default.subscriptTick(pairs: ["ETH_BTC"])
         TickServer.default.dicVariable.asObservable().bind{ result in
             log(result["ETH_BTC"])
         }
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        SocketManager.shared.subscribe(server: ServerExTicBTC())    ////数字货币兑换BTC的汇率
 //      SocketManager.shared.subscribe(server: ServerTick())        ////行情
         
-        UserInfo.default.language = "en"
+        UserInfo.default.language = .english
         UserInfo.default.token = "ffd"
         
         SZProvider.request(.AllTradeInfo) { result in

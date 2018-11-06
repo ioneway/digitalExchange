@@ -1,0 +1,24 @@
+{
+    "BackGround_Level1" : "#2F364D",
+    "BackGround_Level2" : "#232939",
+    "BackGround_Level3" : "#191D29",
+    "BackGround_Level4" : "#121621",
+    "BackGround_Level5" : "#1E2331",
+
+    "Text_Level1" : "#CDD5E2",
+    "Text_Level2" : "#93A2B8",
+    "Text_Level3" : "#667791",
+    "Text_Level4" : "#4B5A71",
+    "Text_Level5" : "#AFB9C8",
+    "Text_Level6" : "#7D8CA5",
+
+    "Block_Main" : "#AB2F2F",
+    "Block_Drop" : "#AB2F2F",
+    "Block_Increase" : "#AB2F2F",
+    "Block_Seperate" : "#AB2F2F",
+    "Block_Red" : "#AB2F2F",
+    "Block_node" : "#AB2F2F",
+
+    "White" : "#FFFFFF" 
+
+}
