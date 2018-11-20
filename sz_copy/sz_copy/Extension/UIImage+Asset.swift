@@ -11,8 +11,6 @@ https://github.com/AliSoftware/SwiftGen 在电脑上安装这个工具，自动�
 */
 
 
-
-
 import Foundation
 import UIKit
 import NightNight
@@ -21,27 +19,27 @@ typealias ImgAsset = UIImage.Asset
 
 extension MixedImage {
     public convenience init(asset: String) {
-        self.init(normal: UIImage(named: asset)!, night: UIImage(named:asset+"_night")!)
+        self.init(normal: UIImage(named: asset) ?? UIImage(named:asset+"_night")!, night: UIImage(named:asset+"_night")!)
     }
 }
 
 
 extension UIImage {
     enum Asset : String {
-        case Tab_home = "tab_home_normal_night"
-        case Tab_home_selected = "tab_home_selected_night"
+        case Tab_home = "tab_home_normal"
+        case Tab_home_selected = "tab_home_selected"
         
-        case Tab_market = "tab_market_normal_night"
-        case Tab_market_selected = "tab_market_selected_night"
+        case Tab_market = "tab_market_normal"
+        case Tab_market_selected = "tab_market_selected"
         
-        case Tab_exchange = "tab_exchange_normal_night"
-        case Tab_exchange_selected = "tab_exchange_selected_night"
+        case Tab_exchange = "tab_exchange_normal"
+        case Tab_exchange_selected = "tab_exchange_selected"
         
-        case Tab_mining = "tab_mining_normal_night"
-        case Tab_mining_selected = "tab_mining_selected_night"
+        case Tab_mining = "tab_mining_normal"
+        case Tab_mining_selected = "tab_mining_selected"
         
-        case Tab_mine = "tab_mine_normal_night"
-        case Tab_mine_selected = "tab_mine_selected_night"
+        case Tab_mine = "tab_mine_normal"
+        case Tab_mine_selected = "tab_mine_selected"
         
         case notice = "notice"
         case pageControl_selected = "pageControl_selected"
@@ -73,11 +71,13 @@ extension UIImage {
         }
     }
     
-    convenience init!(asset: Asset) {
-        self.init(named: asset.rawValue)
+    convenience init!(asset: Asset?) {
+        if UserInfo.default.theme == .day {
+             self.init(named: asset?.rawValue ?? "")
+        }else {
+            self.init(named: (asset?.rawValue ?? "") + "_night")
+        }
     }
-    
-    
 }
 
 /****使用*****/

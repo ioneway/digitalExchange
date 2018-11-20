@@ -133,9 +133,6 @@
 		4A69CC192146A4FC007B9033 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A69CC182146A4FC007B9033 /* Assets.xcassets */; };
 		4A69CC1C2146A4FC007B9033 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A69CC1A2146A4FC007B9033 /* LaunchScreen.storyboard */; };
 		4A69CC272146A4FD007B9033 /* sz_copyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69CC262146A4FD007B9033 /* sz_copyTests.swift */; };
-		4A78B05C2181AC0500E102AF /* PageVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B05B2181AC0300E102AF /* PageVIewController.swift */; };
-		4A78B05E2181AC5300E102AF /* PageMenuConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B05D2181AC5300E102AF /* PageMenuConfig.swift */; };
-		4A78B0602182360800E102AF /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A78B05F2182360800E102AF /* PageMenuView.swift */; };
 		4ACFCA43217246050037F902 /* PriceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFCA42217246050037F902 /* PriceInputView.swift */; };
 		4ACFCA462172DA5B0037F902 /* NumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFCA452172DA5B0037F902 /* NumberInputView.swift */; };
 		4ACFCA492172F6250037F902 /* DropDownBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACFCA482172F6250037F902 /* DropDownBtn.swift */; };
@@ -286,9 +283,6 @@
 		4A69CC222146A4FD007B9033 /* sz_copyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sz_copyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A69CC262146A4FD007B9033 /* sz_copyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sz_copyTests.swift; sourceTree = "<group>"; };
 		4A69CC282146A4FD007B9033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A78B05B2181AC0300E102AF /* PageVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVIewController.swift; sourceTree = "<group>"; };
-		4A78B05D2181AC5300E102AF /* PageMenuConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageMenuConfig.swift; sourceTree = "<group>"; };
-		4A78B05F2182360800E102AF /* PageMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
 		4ACFCA42217246050037F902 /* PriceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInputView.swift; sourceTree = "<group>"; };
 		4ACFCA4421725A320037F902 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4ACFCA452172DA5B0037F902 /* NumberInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputView.swift; sourceTree = "<group>"; };
@@ -557,7 +551,6 @@
 		4A4E98CF2150F0ED0093A97F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4A78B05A2181ABAA00E102AF /* SliderNavigation */,
 				4A5451E02171D2AD003E3CB2 /* ActionSheet */,
 				4A5B1550216C77F50054443C /* pagemenuViewController */,
 				4A17026C2154F0A900ADAB90 /* NSData+CRC32.h */,
@@ -791,17 +784,6 @@
 			path = sz_copyTests;
 			sourceTree = "<group>";
 		};
-		4A78B05A2181ABAA00E102AF /* SliderNavigation */ = {
-			isa = PBXGroup;
-			children = (
-				4A78B05B2181AC0300E102AF /* PageVIewController.swift */,
-				4A78B05D2181AC5300E102AF /* PageMenuConfig.swift */,
-				4A78B05F2182360800E102AF /* PageMenuView.swift */,
-			);
-			name = SliderNavigation;
-			path = pagemenuViewController/SliderNavigation;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1019,7 +1001,6 @@
 				4A1702672154D48D00ADAB90 /* SocketManager.swift in Sources */,
 				4A170287215A000300ADAB90 /* CTcpServer.swift in Sources */,
 				4A4E1B22215E0C6500A09CC5 /* ExchangeTotalRequestModel.swift in Sources */,
-				4A78B05C2181AC0500E102AF /* PageVIewController.swift in Sources */,
 				4A17021F2153811F00ADAB90 /* MineViewController.swift in Sources */,
 				4A17025D2154D48D00ADAB90 /* SocketServerable.swift in Sources */,
 				4A4E98BA214FD1920093A97F /* Model.swift in Sources */,
@@ -1044,9 +1025,7 @@
 				4A5B1560216C77F50054443C /* MenuViewCustomizable.swift in Sources */,
 				4A4E98F62150F0ED0093A97F /* DateHelper.swift in Sources */,
 				4A170290215A114E00ADAB90 /* ExTickBTCModels.swift in Sources */,
-				4A78B0602182360800E102AF /* PageMenuView.swift in Sources */,
 				4A1702602154D48D00ADAB90 /* ServerExRate.swift in Sources */,
-				4A78B05E2181AC5300E102AF /* PageMenuConfig.swift in Sources */,
 				4A4E98C4214FD1920093A97F /* DataModel.swift in Sources */,
 				4A4E98E72150F0ED0093A97F /* Array.swift in Sources */,
 				4A1702652154D48D00ADAB90 /* ServerChart.swift in Sources */,

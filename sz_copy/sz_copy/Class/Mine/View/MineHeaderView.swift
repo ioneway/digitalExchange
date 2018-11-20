@@ -14,7 +14,7 @@ class MineHeaderView: UIView {
     
     var iconView: UIImageView = {
        let temp = UIImageView()
-        temp.image = ImgAsset.portrait.image
+        temp.mixedImage = ImgAsset.portrait.mixImg
         return temp
     }()
     
@@ -28,7 +28,7 @@ class MineHeaderView: UIView {
     
     var arrowView: UIImageView = {
         let temp = UIImageView()
-        temp.image = ImgAsset.arrow_right.image
+        temp.mixedImage = ImgAsset.arrow_right.mixImg
         return temp
     }()
     
@@ -42,7 +42,7 @@ class MineHeaderView: UIView {
     
     var cornerStoneView: UIImageView = {
         let temp = UIImageView()
-        temp.image = ImgAsset.cornerStone.image
+        temp.mixedImage = ImgAsset.cornerStone.mixImg
         return temp
     }()
     
@@ -58,9 +58,7 @@ class MineHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ColorAsset.BackGround.Level2.color
         mixedBackgroundColor = ColorAsset.Text.Level2.mixColor
-        
         setupUI()
         configConstraints()
     }

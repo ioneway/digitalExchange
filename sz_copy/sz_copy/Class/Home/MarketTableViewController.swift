@@ -44,7 +44,6 @@ class MarketTableViewController: BaseViewController<MarketTableViewModel>, UITab
        let temp = UITableView()
         temp.delegate = self
         temp.dataSource = self
-        temp.bounces = false
         temp.registerNib(MarketTableViewCell.self)
         let view = UIView()
         view.backgroundColor = ColorAsset.BackGround.Level3.color
@@ -61,22 +60,23 @@ class MarketTableViewController: BaseViewController<MarketTableViewModel>, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = viewModel?.dataSource.count ?? 0
-        return count
+        if count > 0 {
+            return 100
+        }else {
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MarketTableViewCell = tableView.dequeue(indexPath: indexPath)
-        cell.model = viewModel?.dataSource[indexPath.row]
+        cell.model = viewModel?.dataSource[0]
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if tableView == scrollView as! UITableView {
-            let rect = self.view.convert(view.bounds, to: AppDelegate.default.window)
-            log (rect)
-            if (rect.minY <= 124) {
-//                scrollView.contentOffset.y = 0
-            }
+            
         }
     }
     

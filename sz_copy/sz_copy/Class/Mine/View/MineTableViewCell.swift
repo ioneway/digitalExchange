@@ -24,13 +24,13 @@ class MineTableViewCell: UITableViewCell {
     var titleLabel: UILabel = {
         let temp = UILabel()
         temp.font = FontAsset.PingFangSC_Regular.size(.Level14)
-        temp.textColor = ColorAsset.Text.Level2.color
+        temp.mixedTextColor = ColorAsset.Text.Level2.mixColor
         return temp
     }()
     
     var arrowView: UIImageView = {
         let temp = UIImageView()
-        temp.image = ImgAsset.arrow_right.image
+        temp.mixedImage = ImgAsset.arrow_right.mixImg
         return temp
     }()
     
@@ -42,8 +42,8 @@ class MineTableViewCell: UITableViewCell {
         self.contentView.addSubview(arrowView)
         self.selectedBackgroundView = UIView()
         
-        contentView.backgroundColor = ColorAsset.BackGround.Level3.color
-        self.backgroundColor = ColorAsset.BackGround.Level3.color
+        contentView.mixedBackgroundColor = ColorAsset.BackGround.Level3.mixColor
+        self.mixedBackgroundColor = ColorAsset.BackGround.Level3.mixColor
         configConstraint()
     }
     

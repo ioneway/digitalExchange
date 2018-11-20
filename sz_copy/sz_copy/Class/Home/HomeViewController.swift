@@ -9,24 +9,17 @@
 import UIKit
 import SDCycleScrollView
 import RxSwift
+import NightNight
 
 let kHomeViewPagingBarHeight: CGFloat = 35
 
-class HomeViewController: BaseViewController<HomeViewModel>, UIScrollViewDelegate{
+class HomeViewController: BaseViewController<HomeViewModel>, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     private var _options: HomeMenuOptions!
     private var _pagingVC: PagingMenuController!
-    private lazy var sview: UIView = {
-        let temp = UIView()
-//        temp.frame = self.view.bounds
-        temp.height = 10000
-        temp.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
-        return temp
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     internal override func setupUI() {
@@ -119,21 +112,15 @@ class HomeViewController: BaseViewController<HomeViewModel>, UIScrollViewDelegat
             self.miniView.circulationTotal = result?.circulationTotal ?? "--.--"
         }
     }
-    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if contentScroll == scrollView {
-            if contentScroll.contentOffset.y < 400 {
-                if sview.superview == nil {
-                    self.contentScroll.addSubview(sview)
-                }
+            if contentScroll.contentOffset.y >= 400 {
+                contentScroll.contentOffset.y = 400
             }else {
-                sview.removeFromSuperview()
-            }
-            
-            let rect = _pagingVC.view.convert(_pagingVC.view.bounds, to: AppDelegate.default.window)
-            log ("=======\(rect)")
-            if (rect.minY <= 89) {
-                //                scrollView.contentOffset.y = 0
+               
             }
         }
     }
@@ -183,6 +170,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, UIScrollViewDelegat
     
     private let _disposeBag = DisposeBag()
 }
+
+
 
 
 struct HomeMenuOptions: PagingMenuControllerCustomizable {

@@ -12,13 +12,11 @@ class MarketViewController: BaseViewController<MarketViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }
 
 
 struct MarketMenuOptions: PagingMenuControllerCustomizable {
-    
     static var marketVM_0: MarketTableViewModel =  {
         let temp = MarketTableViewModel()
         temp.coinName = APPTransactionPair.default.sourceCoins[0]
@@ -89,7 +87,6 @@ struct MarketMenuOptions: PagingMenuControllerCustomizable {
                                      font: font,
                                      selectedFont: selectedFont
             )
-            
             return .multilineText(title: title, description: MenuItemText(text: ""))
         }
     }
@@ -102,7 +99,6 @@ struct MarketMenuOptions: PagingMenuControllerCustomizable {
                                      font: font,
                                      selectedFont: selectedFont
             )
-            
             return .multilineText(title: title, description: MenuItemText(text: ""))
         }
     }

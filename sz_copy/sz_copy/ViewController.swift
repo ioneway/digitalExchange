@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NightNight
 
 class ViewController: BaseViewController<TabBarViewModel>, UITabBarControllerDelegate  {
 
@@ -23,35 +24,36 @@ class ViewController: BaseViewController<TabBarViewModel>, UITabBarControllerDel
         
         let marketVC: MarketViewController = Router.viewController((viewModel?.marketViewModel)!) as! MarketViewController
         let marketNav = generateNav(rootVC: marketVC, title: "行情".local, selectedImage: ImgAsset.Tab_market_selected.image, normalImage: ImgAsset.Tab_market.image)
-        marketNav.navigationBar.barTintColor = ColorAsset.BackGround.Level2.color
+//        marketNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level2.mixColor
         marketNav.navigationBar.shadowImage = UIImage()
         marketNav.navigationBar.isTranslucent = false
-        marketNav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:ColorAsset.Text.Level1.color]
-        marketNav.navigationBar.tintColor = ColorAsset.Text.Level1.color
+        marketNav.navigationBar.mixedTitleTextAttributes = [NNForegroundColorAttributeName : ColorAsset.Text.Level1.mixColor]
+        marketNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level3.mixColor
         
         let exchangeVC: ExchangeViewController = Router.viewController((viewModel?.exchangeViewModel)!) as! ExchangeViewController
         let exchangeNav = generateNav(rootVC: exchangeVC, title: "交易".local, selectedImage: ImgAsset.Tab_exchange_selected.image, normalImage: ImgAsset.Tab_exchange.image)
-        exchangeNav.navigationBar.barTintColor = ColorAsset.BackGround.Level3.color
+//        exchangeNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level3.mixColor
         exchangeNav.navigationBar.shadowImage = UIImage()
         exchangeNav.navigationBar.isTranslucent = false
-        exchangeNav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:ColorAsset.Text.Level1.color]
-        exchangeNav.navigationBar.tintColor = ColorAsset.Text.Level1.color
+        exchangeNav.navigationBar.mixedTitleTextAttributes = [NNForegroundColorAttributeName : ColorAsset.Text.Level1.mixColor]
+        exchangeNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level3.mixColor
         
         let miningVC: MiningViewController = Router.viewController((viewModel?.miningViewModel)!) as! MiningViewController
         let miningNav = generateNav(rootVC: miningVC, title: "挖矿".local, selectedImage: ImgAsset.Tab_mining_selected.image, normalImage: ImgAsset.Tab_mining.image)
-        miningNav.navigationBar.barTintColor = ColorAsset.BackGround.Level2.color
+//        miningNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level2.mixColor
         miningNav.navigationBar.shadowImage = UIImage()
         miningNav.navigationBar.isTranslucent = false
-        miningNav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:ColorAsset.Text.Level1.color]
-        miningNav.navigationBar.tintColor = ColorAsset.Text.Level1.color
+        miningNav.navigationBar.mixedTitleTextAttributes = [NNForegroundColorAttributeName : ColorAsset.Text.Level1.mixColor]
+        miningNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level3.mixColor
         
         let mineVC: MineViewController = Router.viewController((viewModel?.mineViewModel)!) as! MineViewController
         let mineNav = generateNav(rootVC: mineVC, title: "我的".local, selectedImage: ImgAsset.Tab_mine_selected.image, normalImage: ImgAsset.Tab_mine.image)
-        mineNav.navigationBar.barTintColor = ColorAsset.BackGround.Level2.color
+//        mineNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level2.mixColor
         mineNav.navigationBar.shadowImage = UIImage()
         mineNav.navigationBar.isTranslucent = false
-        mineNav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:ColorAsset.Text.Level1.color]
-        mineNav.navigationBar.tintColor = ColorAsset.Text.Level1.color
+        mineNav.navigationBar.mixedTitleTextAttributes = [NNForegroundColorAttributeName : ColorAsset.Text.Level1.mixColor]
+        mineNav.navigationBar.mixedBarTintColor = ColorAsset.BackGround.Level3.mixColor
+        
 
         self.vmTabBarController.viewControllers = [homeNav, marketNav, exchangeNav, miningNav, mineNav]
         NavigationControllerStack.push(homeNav)
@@ -63,7 +65,7 @@ class ViewController: BaseViewController<TabBarViewModel>, UITabBarControllerDel
                 NavigationControllerStack.push(viewController as! UINavigationController)
             }.disposed(by: self.vmTabBarController.rx.disposeBag)
         
-        self.vmTabBarController.tabBar.barTintColor = ColorAsset.BackGround.Level4.color
+        self.vmTabBarController.tabBar.mixedBarTintColor = ColorAsset.BackGround.Level4.mixColor
     }
 
     private func generateNav(rootVC: UIViewController,
@@ -77,7 +79,7 @@ class ViewController: BaseViewController<TabBarViewModel>, UITabBarControllerDel
         item.title = title
         item.image = normalImage
         item.selectedImage = selectedImage
-        item.setTitleTextAttributes([.foregroundColor: ColorAsset.Text.Level3.color], for: .normal)
+        item.setTitleTextAttributes([.foregroundColor : ColorAsset.Text.Level1.color], for: .normal)
         item.setTitleTextAttributes([.foregroundColor: ColorAsset.Block.Red.color], for: .selected)
         nav.tabBarItem = item
         

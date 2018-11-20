@@ -13,12 +13,11 @@
     "Text_Level6" : "#7D8CA5",
 
     "Block_Main" : "#AB2F2F",
-    "Block_Drop" : "#AB2F2F",
-    "Block_Increase" : "#AB2F2F",
-    "Block_Seperate" : "#AB2F2F",
-    "Block_Red" : "#AB2F2F",
-    "Block_node" : "#AB2F2F",
+    "Block_Drop" : "#E83430",
+    "Block_Increase" : "#109053",
+    "Block_Seperate" : "#485E7E",
+    "Block_Red" : "#B82A2A",
+    "Block_node" : "#2A374C",
 
     "White" : "#FFFFFF" 
-
 }

@@ -60,13 +60,12 @@ extension UIColor {
             case Level3 = "BackGround_Level3"
             case Level4 = "BackGround_Level4"  //Tabbar颜色
             case Level5 = "BackGround_Level5"  //交易首页导航栏
-            
-            
+        
             var color : UIColor {
-                return UIColor(hexStr: self.rawValue)
+                return UIColor(hexStr: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
             var mixColor : MixedColor {
-                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.day[self.rawValue] ?? "#000000")
+                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
         }
         
@@ -79,10 +78,10 @@ extension UIColor {
             case Level6 = "Text_Level6"
             
             var color : UIColor {
-                return UIColor(hexStr: self.rawValue)
+                return UIColor(hexStr: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
             var mixColor : MixedColor {
-                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.day[self.rawValue] ?? "#000000")
+                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
         }
         
@@ -95,20 +94,21 @@ extension UIColor {
             case node = "Block_node"
             
             var color : UIColor {
-                return UIColor(hexStr: self.rawValue)
+                return UIColor(hexStr: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
             var mixColor : MixedColor {
-                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.day[self.rawValue] ?? "#000000")
+                return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
             }
         }
         
         case White = "#FFFFFF"
         
         var color : UIColor {
-            return UIColor(hexStr: self.rawValue)
+            return UIColor(hexStr: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
         }
+        
         var mixColor : MixedColor {
-            return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.day[self.rawValue] ?? "#000000")
+            return MixedColor.init(day: ThemeColor.default.day[self.rawValue] ?? "#000000", night: ThemeColor.default.night[self.rawValue] ?? "#ffffff")
         }
     }
 }

@@ -75,14 +75,12 @@ final class UserInfo: Codable, DefaultsSerializable {
         }
     }
     
-    
-    
     static let `default`: UserInfo = UserInfo()
     
     init() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(write), name: .UIApplicationDidEnterBackground, object: nil)
-        guard let obj = Defaults[.userInfoKey] else { return }
+        guard let obj = read() else { return }
         
         self.loginName = obj.loginName
         self.nickName = obj.nickName
@@ -142,6 +140,10 @@ final class UserInfo: Codable, DefaultsSerializable {
     
     @objc func write() { //写入数据
         Defaults[.userInfoKey] = self
+    }
+    
+     func read() -> UserInfo? { //读数据
+        return Defaults[.userInfoKey] ?? nil
     }
     
     private func changeLoginState() {
